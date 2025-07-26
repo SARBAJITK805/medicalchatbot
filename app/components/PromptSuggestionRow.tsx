@@ -10,10 +10,18 @@ export default function PromptSuggestionRow({ onClickHandler }: {
         "Summarize the differences between viral and bacterial infections.",
         "Discuss the importance of vaccination in public health."
     ]
+    
     return (
-        <div>
+        <div className="grid gap-3 max-w-2xl mx-auto">
+            <h3 className="text-lg font-semibold text-gray-800 mb-2 text-center">
+                Try asking about:
+            </h3>
             {prompts.map((prompt, index) =>
-                <PromptSuggestionButton key={index} text={prompt} onClickHandler={() => onClickHandler(prompt)} />
+                <PromptSuggestionButton 
+                    key={index} 
+                    text={prompt} 
+                    onClickHandler={() => onClickHandler(prompt)} 
+                />
             )}
         </div>
     )

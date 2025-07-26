@@ -27,7 +27,6 @@ export async function POST(req: Request) {
 
         let docContext = ""
         
-        
         const model = genAI.getGenerativeModel({ model: "text-embedding-004" });
         const embedding = await model.embedContent(latestMsg)
         
@@ -48,13 +47,11 @@ export async function POST(req: Request) {
             docContext = "";
         }
 
-        
         const formattedMessages = messages.map((msg: any) => ({
             role: msg.role === 'assistant' ? 'model' : 'user',
             parts: [{ text: msg.content }]
         }));
 
-        
         const systemPrompt = `You are a highly knowledgeable and reliable AI assistant specialized in medicine. Your responsibilities include providing accurate, evidence-based, and up-to-date information about a wide range of medical topics, such as diseases, treatments, medications, symptoms, diagnostics, healthcare practices, and medical research. When responding to user questions:
         - Use clear, concise, and professional language suitable for both laypersons and healthcare professionals.
         - Integrate and reference any relevant context provided, including recent research, clinical guidelines, or information from the context below.
@@ -70,7 +67,6 @@ export async function POST(req: Request) {
         
         Your primary goal is to educate, inform, and support users in understanding medical topics safely and responsibly.`;
 
-        
         const conversationHistory = [
             {
                 role: 'user',
