@@ -7,7 +7,17 @@ import Bubble from "./components/Bubble";
 
 export default function Home() {
   const { messages, append, isLoading, input, handleInputChange, handleSubmit } = useChat()
-  const onMessage = true;
+  const onMessage = !messages || messages.length === 0
+
+  function onPromptClick(promptText: string) {
+    const message: Message = {
+      id: crypto.randomUUID(),
+      content: promptText,
+      role: "user",
+    }
+    append(message)
+  }
+
   return (
     <main>
       {/* image */}
@@ -15,11 +25,11 @@ export default function Home() {
         {onMessage ? (<>
           <p>The ultimate platform for medical advice We hope you enjoy</p>
           <br />
-          <PromptSuggestionRow />
+          <PromptSuggestionRow onClickHandler={onPromptClick} />
         </>
         ) : (
           <>
-            {messages.map((message,index) => {
+            {messages.map((message, index) => {
               <Bubble key={index} message={message} />
             })}
             {isLoading && <LoadingBubble />}
