@@ -112,7 +112,7 @@ const loadSampleData = async () => {
             console.log(`Created ${chunks.length} chunks for ${url}`);
             
             for (const chunk of chunks) {
-                if (!chunk.trim()) continue; // Skip empty chunks
+                if (!chunk.trim()) continue; 
                 
                 try {
                     const vector = await getEmbedding(chunk);
@@ -126,7 +126,7 @@ const loadSampleData = async () => {
                     
                     console.log(`Inserted chunk from ${url}:`, res);
                     
-                    // Add a small delay to respect rate limits
+                    
                     await new Promise(resolve => setTimeout(resolve, 100));
                     
                 } catch (embeddingError) {
@@ -135,12 +135,12 @@ const loadSampleData = async () => {
             }
         }
         console.log("Data loading completed!");
+        return ;
     } catch (error) {
         console.error("Error in loadSampleData:", error);
     }
 }
 
-// Main execution
 const main = async () => {
     try {
         await createCollection();
