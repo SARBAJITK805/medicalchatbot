@@ -47,7 +47,17 @@ export async function POST(req: Request) {
             docContext = "";
         }
 
-        const formattedMessages = messages.map((msg: any) => ({
+        interface ChatMessage {
+            role: 'user' | 'assistant';
+            content: string;
+        }
+
+        interface GeminiMessage {
+            role: 'user' | 'model';
+            parts: { text: string }[];
+        }
+
+        const formattedMessages: GeminiMessage[] = (messages as ChatMessage[]).map((msg: ChatMessage): GeminiMessage => ({
             role: msg.role === 'assistant' ? 'model' : 'user',
             parts: [{ text: msg.content }]
         }));
